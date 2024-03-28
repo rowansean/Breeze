@@ -1,19 +1,19 @@
-import Image from "next/image";
-import { Card } from '@tremor/react';
+import HourlyForecast from "@/components/HourlyForecast";
+import TenDayForecast from "@/components/TenDayForecast";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Icon } from "@tremor/react";
+import { SunIcon } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="b border-4 border-black min-h-screen p-3">
-      <h1>Charlotte</h1>
-      <p>67*</p>
-      <Card className="bg-white">
-        <h1>Hourly Forecast</h1>
-        <ul>
-          <li>12:00 PM: 67*</li>
-          <li>1:00 PM: 67*</li>
-          <li>2:00 PM: 67*</li>
-        </ul>
-      </Card>
+    <div className="flex flex-col gap-10 border-4 bg-blue-300 border-black min-h-screen p-3">
+      <div className="header text-white text-center">
+        <h1 className="text-4xl drop-shadow-md">Charlotte</h1>
+        <p className="text-8xl drop-shadow-md">67*</p>
+      </div>
+
+      <HourlyForecast />
+      <TenDayForecast />
     </div>
   );
 }
