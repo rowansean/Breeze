@@ -3,7 +3,7 @@ import HourlyForecast from "@/components/HourlyForecast";
 import TenDayForecast from "@/components/TenDayForecast";
 import TodaySummary from "@/components/TodaySummary";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Icon } from "@tremor/react";
+import { Icon, Tracker } from "@tremor/react";
 import { SunIcon, SunriseIcon, SunsetIcon } from "lucide-react";
 
 export default function Home() {
