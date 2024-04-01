@@ -8,8 +8,8 @@ import { SunIcon, SunriseIcon, SunsetIcon } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-5 bg-gradient-to-b from-[#FFF385] via-[#4182FF] via-50% to-[#4182FF] to-100% p-3 overflow-x-hidden">
-      <Header className="mt-20">
+    <div className="flex flex-col gap-5 overflow-x-hidden">
+      <Header className="">
         <h1 className="text-4xl drop-shadow-md">Charlotte</h1>
       </Header>
       <TodaySummary />
