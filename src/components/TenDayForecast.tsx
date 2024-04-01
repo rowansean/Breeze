@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardContent, CardHeader } from "./ui/card";
+import TenDayItem from "./ui/TenDayItem";
 
 export default function TenDayForecast() {
   return (
@@ -8,12 +9,17 @@ export default function TenDayForecast() {
         <h1>10 Day Forecast</h1>
       </CardHeader>
       <CardContent className="">
-        <ul>
-          <li>Day 1</li>
-          <li>Day 2</li>
-          <li>Day 3</li>
-          <li>Day 4</li>
-        </ul>
+          <TenDayItem />
+          <TenDayItem />
+          <TenDayItem />
+          <TenDayItem />
+          <TenDayItem />
+          <TenDayItem />
+          <TenDayItem />
+          <TenDayItem />
+          <TenDayItem />
+          <TenDayItem />
+          <TenDayItem />
       </CardContent>
     </Card>
   );
