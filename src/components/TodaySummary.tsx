@@ -1,11 +1,11 @@
 import { SunIcon, SunriseIcon, SunsetIcon } from "lucide-react";
 import React from "react";
 
-export default function TodaySummary() {
+export default function TodaySummary({weather} : {weather: object}) {
   return (
     <div className="">
       <h1 className="text-8xl text-white drop-shadow-lg my-5 text-center ml-8">
-        67°
+        {weather?.data.values.temperature}
       </h1>
 
       <div className="flex flex-col items-center font-light mb-5">
