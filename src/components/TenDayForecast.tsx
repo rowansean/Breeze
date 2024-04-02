@@ -1,17 +1,24 @@
 "use client";
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Switch } from "@/components/ui/switch";
-import { SunIcon, CloudRainIcon, CloudIcon, CloudSunIcon } from "lucide-react";
+import { SunIcon, CloudSun, CloudRain, CircleHelp } from "lucide-react";
+
+const iconMap: { [key: string]: JSX.Element } = {
+  sunny: <SunIcon className="text-yellow-300 drop" />,
+  cloudy: <CloudSun className="text-gray-300 drop" />,
+  rainy: <CloudRain className="text-blue-300 drop" />,
+  default: <CircleHelp className="text-gray-300 drop" />,
+};
 
 export default function TenDayForecast() {
   const [unit, setUnit] = useState("F");
+
   // Sample data for 10 days
   const forecastData = [
     {
       day: "Monday",
-      icon: CloudIcon,
+      icon: "cloudy",
       highTemp: 80,
       lowTemp: 65,
       windSpeed: "10 mph",
@@ -19,7 +26,7 @@ export default function TenDayForecast() {
     },
     {
       day: "Tuesday",
-      icon: CloudRainIcon,
+      icon: "rainy",
       highTemp: 70,
       lowTemp: 60,
       windSpeed: "15 mph",
@@ -27,7 +34,7 @@ export default function TenDayForecast() {
     },
     {
       day: "Wednesday",
-      icon: SunIcon,
+      icon: "sunny",
       highTemp: 75,
       lowTemp: 62,
       windSpeed: "8 mph",
@@ -35,7 +42,7 @@ export default function TenDayForecast() {
     },
     {
       day: "Thursday",
-      icon: CloudSunIcon,
+      icon: "cloudy",
       highTemp: 78,
       lowTemp: 63,
       windSpeed: "12 mph",
@@ -43,7 +50,7 @@ export default function TenDayForecast() {
     },
     {
       day: "Friday",
-      icon: CloudRainIcon,
+      icon: "rainy",
       highTemp: 68,
       lowTemp: 58,
       windSpeed: "18 mph",
@@ -51,7 +58,7 @@ export default function TenDayForecast() {
     },
     {
       day: "Saturday",
-      icon: SunIcon,
+      icon: "sunny",
       highTemp: 82,
       lowTemp: 67,
       windSpeed: "6 mph",
@@ -59,7 +66,7 @@ export default function TenDayForecast() {
     },
     {
       day: "Sunday",
-      icon: SunIcon,
+      icon: "sunny",
       highTemp: 85,
       lowTemp: 70,
       windSpeed: "5 mph",
@@ -67,7 +74,7 @@ export default function TenDayForecast() {
     },
     {
       day: "Monday",
-      icon: CloudIcon,
+      icon: "cloudy",
       highTemp: 79,
       lowTemp: 64,
       windSpeed: "10 mph",
@@ -75,7 +82,7 @@ export default function TenDayForecast() {
     },
     {
       day: "Tuesday",
-      icon: CloudRainIcon,
+      icon: "rainy",
       highTemp: 72,
       lowTemp: 61,
       windSpeed: "14 mph",
@@ -83,7 +90,7 @@ export default function TenDayForecast() {
     },
     {
       day: "Wednesday",
-      icon: CloudSunIcon,
+      icon: "cloudy",
       highTemp: 77,
       lowTemp: 63,
       windSpeed: "9 mph",
@@ -96,9 +103,7 @@ export default function TenDayForecast() {
   };
 
   const convertTemperature = (temp: number) => {
-    return unit === "F"
-      ? `${temp}°F`
-      : `${Math.round(((temp - 32) * 5) / 9)}°C`;
+    return unit === "F" ? `${temp}°F` : `${Math.round(((temp - 32) * 5) / 9)}°C`;
   };
 
   return (
@@ -106,9 +111,7 @@ export default function TenDayForecast() {
       <CardHeader className="flex flex-row justify-between">
         <h1>10 Day Forecast</h1>
         <div className="flex flex-row space-x-2">
-          F°
-          <Switch className="mx-2" onCheckedChange={toggleUnit} />
-          C°
+          F° <Switch className="mx-2" onCheckedChange={toggleUnit} /> C°
         </div>
       </CardHeader>
       <CardContent>
@@ -117,9 +120,29 @@ export default function TenDayForecast() {
             <div key={index} className="flex items-center justify-between">
               <div>
                 <p className="text-lg font-semibold">{day.day}</p>
-                <p className="text-sm text-slate-300">{day.windSpeed}</p>
+                <div className="flex items-center">
+                  <p className="text-sm text-slate-300 mr-1">
+                    {day.windSpeed}
+                  </p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-wind"
+                  >
+                    <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2" />
+                    <path d="M9.6 4.6A2 2 0 1 1 11 8H2" />
+                    <path d="M12.6 19.4A2 2 0 1 0 14 16H2" />
+                  </svg>
+                </div>
               </div>
-              <day.icon className="mx-4" />
+              <div className="mx-4">{iconMap[day.icon] || iconMap.default}</div>
               <div className="text-right">
                 <p className="text-blue-400">
                   {convertTemperature(day.lowTemp)}
