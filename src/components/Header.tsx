@@ -13,7 +13,7 @@ export default function Header({
     <div
       className={`${className} flex justify-between px-8 text-white items-center mt-20`}
     >
-      <Link href="/search" className="border">
+      <Link href="/search" className="">
         <Search size={30} className="drop-shadow-md text-black opacity-45" />
       </Link>
       {children}

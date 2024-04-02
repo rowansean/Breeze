@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader } from "./ui/card";
+import { Switch } from "@/components/ui/switch";
 import { SunIcon, CloudRainIcon, CloudIcon, CloudSunIcon } from "lucide-react";
 
 export default function TenDayForecast() {
   const [unit, setUnit] = useState("F");
-
   // Sample data for 10 days
   const forecastData = [
     {
@@ -103,11 +103,13 @@ export default function TenDayForecast() {
 
   return (
     <Card className="over overflow-scroll">
-      <CardHeader>
+      <CardHeader className="flex flex-row justify-between">
         <h1>10 Day Forecast</h1>
-        <button onClick={toggleUnit}>
-          {unit === "F" ? "Switch to °C" : "Switch to °F"}
-        </button>
+        <div className="flex flex-row space-x-2">
+          F°
+          <Switch className="mx-2" onCheckedChange={toggleUnit} />
+          C°
+        </div>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col space-y-4">
@@ -115,14 +117,14 @@ export default function TenDayForecast() {
             <div key={index} className="flex items-center justify-between">
               <div>
                 <p className="text-lg font-semibold">{day.day}</p>
-                <p className="text-sm text-gray-500">{day.windSpeed}</p>
+                <p className="text-sm text-slate-300">{day.windSpeed}</p>
               </div>
               <day.icon className="mx-4" />
               <div className="text-right">
-                <p className="text-blue-500">
-                  {convertTemperature(day.lowTemp)}e
+                <p className="text-blue-400">
+                  {convertTemperature(day.lowTemp)}
                 </p>
-                <p className="text-red-500">
+                <p className="text-red-400">
                   {convertTemperature(day.highTemp)}
                 </p>
               </div>
