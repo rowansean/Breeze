@@ -13,21 +13,18 @@ export default function Header({
   children: React.ReactNode;
   className?: string;
 }) {
-  
   const pathname = usePathname();
 
   return (
     <div
-      className={`${className} flex justify-between text-white items-center mt-20`}
+      className={`${className} flex justify-between text-white items-center`}
     >
-      {/* CONDITIONAL RENDER */}
       {pathname === "/search" ? (
         <DynamicSearch />
       ) : (
-        <div className="flex flex-row justify-between w-full px-8">
-          <SearchButton />
-          {children}
-          <SettingsButton />
+        <div className="flex flex-row w-full px-8 place-items-center">
+          <SearchButton className="" />
+          <div className="text-center flex-grow">{children}</div>
         </div>
       )}
       {/* END CONDITIONAL RENDER */}

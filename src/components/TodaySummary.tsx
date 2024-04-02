@@ -3,12 +3,12 @@ import React from "react";
 
 export default function TodaySummary() {
   return (
-    <div>
+    <div className="">
       <h1 className="text-8xl text-white drop-shadow-lg my-5 text-center ml-8">
         67°
       </h1>
 
-      <div className="flex flex-col items-center w-screen font-light mb-5">
+      <div className="flex flex-col items-center font-light mb-5">
         <div className="flex gap-1">
           <SunIcon className="drop-shadow-lg text-yellow-300" />
           <p className=" text-white drop-shadow-lg">Sunny</p>

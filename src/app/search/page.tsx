@@ -10,7 +10,7 @@ export default function SearchPage() {
   const [searchResults, setSearchResults] = useState([]);
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 max-w-[600px] w-full">
       <Header>
         <DynamicSearch />
       </Header>
