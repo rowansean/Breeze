@@ -10,7 +10,7 @@ export default function DynamicSearch() {
   return (
     <div className="flex w-full gap-5 items-center">
       <Input
-        className="bg-black bg-opacity-45 rounded-xl"
+        className="bg-black bg-opacity-45 rounded-xl border-none shadow-inner"
         placeholder="Search..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
