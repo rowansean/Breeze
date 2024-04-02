@@ -12,7 +12,6 @@ export default function Home() {
       </Header>
       <TodaySummary />
       <HourlyForecast />
-      <AirQualitySmall />
       <TenDayForecast />
     </div>
   );
