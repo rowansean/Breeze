@@ -1,6 +1,10 @@
-import { Search, Settings } from "lucide-react";
-import Link from "next/link";
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
+import DynamicSearch from "./DynamicSearch";
+import SearchButton from "./ui/SearchButton";
+import SettingsButton from "./ui/SettingsButton";
 
 export default function Header({
   children,
@@ -9,17 +13,24 @@ export default function Header({
   children: React.ReactNode;
   className?: string;
 }) {
+  
+  const pathname = usePathname();
+
   return (
     <div
-      className={`${className} flex justify-between px-8 text-white items-center mt-20`}
+      className={`${className} flex justify-between text-white items-center mt-20`}
     >
-      <Link href="/search" className="">
-        <Search size={30} className="drop-shadow-md text-black opacity-45" />
-      </Link>
-      {children}
-      <Link href="/">
-        <Settings size={30} className="drop-shadow-md text-black opacity-45" />
-      </Link>
+      {/* CONDITIONAL RENDER */}
+      {pathname === "/search" ? (
+        <DynamicSearch />
+      ) : (
+        <div className="flex flex-row justify-between w-full px-8">
+          <SearchButton />
+          {children}
+          <SettingsButton />
+        </div>
+      )}
+      {/* END CONDITIONAL RENDER */}
     </div>
   );
 }
