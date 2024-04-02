@@ -102,7 +102,7 @@ export default function TenDayForecast() {
   };
 
   return (
-    <Card className="">
+    <Card className="over overflow-scroll">
       <CardHeader>
         <h1>10 Day Forecast</h1>
         <button onClick={toggleUnit}>
