@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import HourlyForecast from "@/components/HourlyForecast";
-import TenDayForecast from "@/components/TenDayForecast";
+import FiveDayForecast from "@/components/FiveDayForecast";
 import TodaySummary from "@/components/TodaySummary";
 import { RealtimeWeatherResponse, WeatherForecastResponse } from "@/types";
 
@@ -32,7 +32,8 @@ async function getWeatherForecast(location: string) {
 }
 
 export default async function Home() {
-  const location = "Charlotte";
+  const location = "charlotte";
+
   const realtimeWeather = await getRealtimeWeather(location);
   const weatherForecast = await getWeatherForecast(location);
 
@@ -40,12 +41,12 @@ export default async function Home() {
     <div className="flex flex-col gap-5 md:max-w-[600px] w-full">
       <Header>
         <h1 className="text-4xl drop-shadow-md">
-          {realtimeWeather?.location.name}
+          {realtimeWeather?.location.name.split(",")[0]}
         </h1>
       </Header>
       <TodaySummary weather={realtimeWeather!} forecast={weatherForecast!} />
       <HourlyForecast />
-      <TenDayForecast forecast={weatherForecast} />
+      <FiveDayForecast forecast={weatherForecast} />
     </div>
   );
 }
