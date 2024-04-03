@@ -11,8 +11,10 @@ const iconMap: { [key: string]: JSX.Element } = {
   default: <CircleHelp className="text-gray-300 drop" />,
 };
 
-export default function TenDayForecast() {
-  const [unit, setUnit] = useState("F");
+export default function TenDayForecast({forecast} : { forecast?: any }) {
+
+  const [unit, setUnit] = useState("C");
+
 
   // Sample data for 10 days
   const forecastData = [
@@ -103,7 +105,7 @@ export default function TenDayForecast() {
   };
 
   const convertTemperature = (temp: number) => {
-    return unit === "F" ? `${temp}°F` : `${Math.round(((temp - 32) * 5) / 9)}°C`;
+    return unit === "F" ? `${Math.round(((temp * 9) / 5) + 32)}°F`: `${temp}°C`;
   };
 
   return (
@@ -111,18 +113,18 @@ export default function TenDayForecast() {
       <CardHeader className="flex flex-row justify-between">
         <h1>10 Day Forecast</h1>
         <div className="flex flex-row space-x-2">
-          F° <Switch className="mx-2" onCheckedChange={toggleUnit} /> C°
+          C° <Switch className="mx-2" onCheckedChange={toggleUnit} /> F°
         </div>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col space-y-4">
-          {forecastData.map((day, index) => (
+          {forecast.map((day, index) => (
             <div key={index} className="flex items-center justify-between">
               <div>
-                <p className="text-lg font-semibold">{day.day}</p>
+                <p className="text-lg font-semibold">{day?.time}</p>
                 <div className="flex items-center">
                   <p className="text-sm text-slate-300 mr-1">
-                    {day.windSpeed}
+                    {day?.values.windSpeedAvg} mph
                   </p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -145,10 +147,11 @@ export default function TenDayForecast() {
               <div className="mx-4">{iconMap[day.icon] || iconMap.default}</div>
               <div className="text-right">
                 <p className="text-blue-400">
-                  {convertTemperature(day.lowTemp)}
+                  {convertTemperature(day?.values?.temperatureMin)}
+                  {day.temperatureMax}
                 </p>
                 <p className="text-red-400">
-                  {convertTemperature(day.highTemp)}
+                  {convertTemperature(day?.values?.temperatureMax)}
                 </p>
               </div>
             </div>
