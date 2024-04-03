@@ -6,14 +6,12 @@ import { RealtimeWeatherResponse, WeatherForecastResponse } from "@/types";
 
 async function getRealtimeWeather(location: string) {
   try {
-
     const response = await fetch(
       `https://api.tomorrow.io/v4/weather/realtime?location=${location}&apikey=${process.env.API_KEY}`
     );
 
     const data: RealtimeWeatherResponse = await response.json();
     return data;
-    
   } catch (error) {
     console.error(error, "Error fetching Realtime weather data");
   }
@@ -21,15 +19,13 @@ async function getRealtimeWeather(location: string) {
 
 async function getWeatherForecast(location: string) {
   try {
-
     const response = await fetch(
       `https://api.tomorrow.io/v4/weather/forecast?location=${location}&apikey=${process.env.API_KEY}`
     );
 
     const data: WeatherForecastResponse = await response.json();
-    const dailyForecast = data.timelines.daily;
+    const dailyForecast = data.timelines?.daily;
     return dailyForecast;
-
   } catch (error) {
     console.error(error, "Error fetching Forecast data");
   }
@@ -47,7 +43,7 @@ export default async function Home() {
           {realtimeWeather?.location.name}
         </h1>
       </Header>
-      <TodaySummary weather={realtimeWeather} forecast={weatherForecast}/>
+      <TodaySummary weather={realtimeWeather!} forecast={weatherForecast!} />
       <HourlyForecast />
       <TenDayForecast forecast={weatherForecast} />
     </div>
