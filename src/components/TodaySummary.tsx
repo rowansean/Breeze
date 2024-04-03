@@ -1,19 +1,34 @@
+import { RealtimeWeatherResponse, WeatherForecastResponse } from "@/types";
 import { SunIcon, SunriseIcon, SunsetIcon } from "lucide-react";
-import React from "react";
+import weatherCodes from "@/static/weatherCodes.json";
 
-export default function TodaySummary({weather} : {weather: object}) {
+
+export default function TodaySummary({
+  weather,
+  forecast
+}: {
+  weather: RealtimeWeatherResponse;
+  forecast: WeatherForecastResponse;
+}) {
+
+  const weatherCode = weather.data.values.weatherCode;
+  const weatherSummaryPhrase = weatherCodes[weatherCode].phrase;
+
+
   return (
     <div className="">
       <h1 className="text-8xl text-white drop-shadow-lg my-5 text-center ml-8">
-        {weather?.data?.values.temperature}
+        {weather.data.values.temperature.toFixed(0)}°
       </h1>
 
       <div className="flex flex-col items-center font-light mb-5">
         <div className="flex gap-1">
           <SunIcon className="drop-shadow-lg text-yellow-300" />
-          <p className=" text-white drop-shadow-lg">Sunny</p>
+          <p className=" text-white drop-shadow-lg">
+            {weatherSummaryPhrase}
+          </p>
         </div>
-        <p className="text-white drop-shadow-lg">High 70° | Low 45°</p>
+        <p className="text-white drop-shadow-lg">High {}° | Low 45°</p>
         <div className="flex text-white drop-shadow-lg">
           <SunriseIcon size={20} />
           <p>6:30 AM</p>
@@ -22,6 +37,7 @@ export default function TodaySummary({weather} : {weather: object}) {
           <p>8:30 PM</p>
         </div>
       </div>
+
     </div>
   );
 }
