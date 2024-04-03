@@ -5,7 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { SunIcon, CloudSun, CloudRain, CircleHelp, Wind } from "lucide-react";
 import { WeatherForecastResponse } from "@/types";
 import { WeatherCodes } from "@/types";
-import  weatherCodes  from "@/static/weatherCodes.json";
+import weatherCodes from "@/static/weatherCodes.json";
 
 const iconMap: { [key: string]: JSX.Element } = {
   sunny: <SunIcon className="text-yellow-300 drop" />,
@@ -14,7 +14,11 @@ const iconMap: { [key: string]: JSX.Element } = {
   default: <CircleHelp className="text-gray-300 drop" />,
 };
 
-export default function FiveDayForecast({ forecast }: { forecast?: WeatherForecastResponse }) {
+export default function FiveDayForecast({
+  forecast,
+}: {
+  forecast?: WeatherForecastResponse;
+}) {
   const [unit, setUnit] = useState("C");
 
   const toggleUnit = () => {
@@ -52,7 +56,13 @@ export default function FiveDayForecast({ forecast }: { forecast?: WeatherForeca
                   <Wind />
                 </div>
               </div>
-              <div className="mx-4">{iconMap[day.icon] || iconMap.default}</div>
+              <div className="mx-4">
+                {day?.values?.precipitationProbabilityAvg > 1
+                  ? iconMap.rainy
+                  : day?.values?.cloudBaseAvg > 0.5
+                  ? iconMap.cloudy
+                  : iconMap.sunny}
+              </div>
               <div className="text-right">
                 <p className="text-blue-400">
                   {convertTemperature(day?.values?.temperatureMin)}
